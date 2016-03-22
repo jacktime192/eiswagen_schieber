@@ -1,0 +1,83 @@
+<html>
+
+<head>
+  <title>Test</title>
+  <style type="text/css">
+    #unternav3 li{
+      display: inline;
+      color: white;
+    }
+    #unternav3{
+      position: absolute;
+    }
+  </style>
+
+  <script type="text/javascript">
+    function bis2020() {
+      var jetzt = new Date();
+      var Zeit = jetzt.getTime() / 1000;
+      var Jahr2020 = new Date(2020, 0, 1, 0, 0, 0);
+      var Endzeit = Jahr2020.getTime() / 1000;
+      var Rest = Math.floor(Endzeit - Zeit);
+      alert("Noch " + Rest + " Sekunden bis zum Jahr 2020");
+    }
+
+    var end_height = 54;
+    var act_height = 0;
+    var schieber_status = 0;
+    function schieber_auf() {
+      setTimeout(function() {
+
+        if (act_height < end_height) {
+          act_height++;
+          schieber_auf();
+          // navigation routine
+          document.getElementById("unternav3_div").style.height = act_height;
+        }
+        if(act_height == end_height) {
+          document.getElementById("unternav3").style.visibility = 'visible';
+          schieber_status = 1;
+        }
+      }, 7)
+    }
+    function schieber_zu() {
+      setTimeout(function() {
+
+        if (act_height > 0) {
+          act_height--;
+          schieber_zu();
+          // navigation routine
+          document.getElementById("unternav3_div").style.height = act_height;
+        }
+        if(act_height == 0) {
+          document.getElementById("unternav3").style.visibility = 'hidden';
+          schieber_status = 0;
+        }
+      }, 7)
+    }
+
+// Funktion um mit Link auf oder zu zu schieben
+    function schieber(){
+      if (schieber_status == 0){
+        schieber_auf();
+      }
+      if (schieber_status == 1){
+        schieber_zu();
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+  <a href="javascript:schieber()">wie komme ich ran?</a>
+  <div id="unternav3_div" style="background-color:rgb(47, 20, 26);heigth:0;position:relative;">
+    <ul id="unternav3" style="visibility:hidden;">
+      <li>Eisdiele</li>
+      <li>Eiswagen</li>
+      <li>Eiswagerl</li>
+    </ul>
+  </div>
+</body>
+
+</html>
